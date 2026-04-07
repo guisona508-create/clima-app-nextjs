@@ -1,9 +1,11 @@
 "use client"; // Obrigatorio para usar useState e eventos de clique
 
 import { useState } from "react";
+import WeatherCard from "@/components/WeatherCard";
 
 export default function Home() {
   const [city, setCity] = useState("");
+  const [weatherData, setWeatherData] = useState<any>(null);
 
   const handleSearch = async () => {
     // 1. Validar se o input não está vazio
@@ -27,7 +29,9 @@ export default function Home() {
 
       // 3. Dar um console.log no resultado
       console.log(data);
+      setWeatherData(data);
     } catch (error) {
+      setWeatherData(null); // Limpa os dados anteriores em caso de erro
       if (error instanceof Error) {
         console.error("Erro ao buscar:", error.message);
       } else {
@@ -55,6 +59,8 @@ export default function Home() {
           Buscar
         </button>
       </div>
+      {/* Renderização condicional: só mostra o card se weatherData não for nulo */}
+      {weatherData && <WeatherCard data={weatherData} />}
     </main>
   );
 }
