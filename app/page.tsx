@@ -13,9 +13,10 @@ export default function Home() {
     }
 
     try {
+      const apiKey = process.env.NEXT_PUBLIC_WEATHER_KEY;
       // 2. Fazer o fetch na API
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1b544fea7f1c3b2408e550d153d1ccef&units=metric&lang=pt_br`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pt_br`,
       );
 
       if (!response.ok) {
