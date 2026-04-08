@@ -1,11 +1,23 @@
 "use client"; // Obrigatorio para usar useState e eventos de clique
 
+interface WeatherData {
+  name: string;
+  main: {
+    temp: number;
+    humidity: number;
+  };
+  weather: Array<{
+    description: string;
+    icon: string;
+  }>;
+}
+
 import { useState } from "react";
 import WeatherCard from "@/components/WeatherCard";
 
 export default function Home() {
   const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState<any>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   const handleSearch = async () => {
     // 1. Validar se o input não está vazio
